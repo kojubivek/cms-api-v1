@@ -33,6 +33,14 @@ router.post("/login", loginValidation, async (req, res, next) => {
     // find user by email
     const user = await findUser({ email });
     if (user?._id) {
+      if (!user?.isEmailVerified) {
+        return res.json({
+          status: "error",
+          message:
+            "Your email is not verified.Check your email and follow the instructions",
+          user,
+        });
+      }
       // check if plain password and hashed password match
       const isPassMatch = comparePassword(password, user.password);
 

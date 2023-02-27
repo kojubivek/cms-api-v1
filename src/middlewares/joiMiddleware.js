@@ -71,3 +71,11 @@ export const updatCatValidation = (req, res, next) => {
 
   joiValidation(schema, req, res, next);
 };
+
+export const updatePaymentMethodValidation = (req, res, next) => {
+  const schema = Joi.object({
+    _id: Joi.string().required(),
+    paymentType: Joi.string().required(),
+    description: Joi.string().required(),
+  });
+};
