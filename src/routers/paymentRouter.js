@@ -47,6 +47,7 @@ router.post("/", async (req, res, next) => {
 
 router.put("/", updatePaymentMethodValidation, async (req, res, next) => {
   try {
+    console.log(req.body);
     const result = await updatePaymentMethod(req.body);
 
     if (result?._id) {
