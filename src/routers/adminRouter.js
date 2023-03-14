@@ -24,6 +24,7 @@ import {
   createNewSession,
   deleteSession,
 } from "../models/session/SessionModel.js";
+import { signAccessJWT, signRefreshJWT } from "../utils/jwt.js";
 
 //admin user loging
 router.post("/login", loginValidation, async (req, res, next) => {
@@ -51,7 +52,11 @@ router.post("/login", loginValidation, async (req, res, next) => {
         res.json({
           status: "success",
           message: "Login success fully",
-          user,
+
+          tokens: {
+            accessJWT: await signAccessJWT({ email }),
+            refreshJWT: await signRefreshJWT({ email }),
+          },
         });
 
         return;

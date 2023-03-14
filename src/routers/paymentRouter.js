@@ -12,7 +12,7 @@ const router = express.Router();
 router.get("/", async (req, res, next) => {
   try {
     const paymentTypes = await readPaymentMethods();
-    console.log(paymentTypes);
+
     res.json({
       status: "success",
       message: "Available Payment Types Lists",
@@ -47,7 +47,6 @@ router.post("/", async (req, res, next) => {
 
 router.put("/", updatePaymentMethodValidation, async (req, res, next) => {
   try {
-    console.log(req.body);
     const result = await updatePaymentMethod(req.body);
 
     if (result?._id) {
